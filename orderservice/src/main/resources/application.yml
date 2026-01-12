@@ -7,19 +7,30 @@ server:
 spring:
   application:
     name: order-service
+  sql:
+    init:
+      mode: always  # Всегда инициализировать
+      continue-on-error: true  # Продолжать при ошибках
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
 
   datasource:
     url: jdbc:postgresql://localhost:5436/order_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
 
   jpa:
     hibernate:
 #      ddl-auto: create-drop
-    #  ddl-auto: create  # Используйте create для пересоздания таблицы
+      ddl-auto: create  # Используйте create для пересоздания таблицы
     # или
-     ddl-auto: update  # Если хотите сохранить данные
+#     ddl-auto: update  # Если хотите сохранить данные
+#      ddl-auto: validate  # Проверяет, но не создает
+    defer-datasource-initialization: true
+
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
