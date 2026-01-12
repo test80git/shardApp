@@ -1,0 +1,44 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: order-service
+  sql:
+    init:
+      mode: always  # Всегда инициализировать
+      continue-on-error: true  # Продолжать при ошибках
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+
+  datasource:
+    url: jdbc:postgresql://localhost:5436/order_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+#      ddl-auto: create-drop
+      ddl-auto: create  # Используйте create для пересоздания таблицы
+    # или
+#     ddl-auto: update  # Если хотите сохранить данные
+#      ddl-auto: validate  # Проверяет, но не создает
+    defer-datasource-initialization: true
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+logging:
+  level:
+    com.example.orderservice: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
