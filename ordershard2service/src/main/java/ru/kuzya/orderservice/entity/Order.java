@@ -18,28 +18,32 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-
+@Entity
+@Table(name = "orders")
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode(exclude = {"id"})
-@Entity
-@Table(name = "orders")
+@ToString(onlyExplicitlyIncluded = true) // включать только помеченные
+@EqualsAndHashCode(exclude = {"id"}) // исключить из equals/hashCode
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @ToString.Include
     private UUID id;
 
     @Column(name = "user_id", nullable = false)
+    @ToString.Include
     private Long userId;
 
     @Column(name = "product_name", nullable = false)
-    private String productName;
+    @ToString.Include
+    @Builder.Default // значение по умолчанию
+    private String productName = "Имя продукта";
 
     @Column(nullable = false)
+    @ToString.Include
     private Integer quantity;
 
     @Column(name = "created_at", nullable = false)

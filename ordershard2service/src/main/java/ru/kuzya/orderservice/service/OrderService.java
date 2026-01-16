@@ -1,5 +1,6 @@
 package ru.kuzya.orderservice.service;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class OrderService {
     }
 
 
-    public void deleteOrder(UUID id) {
+    public void deleteOrder(@NonNull UUID id) {
         log.info("Deleting order: {}", id);
         int i = 0;
         int i1 = 0;
