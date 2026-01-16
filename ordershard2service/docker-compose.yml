@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  postgres-shard1:
+    image: postgres:16
+    container_name: postgres-shard1
+    environment:
+      POSTGRES_DB: order_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5437:5432"  # Шард 1 на порту 5433
+    volumes:
+      - postgres_shard1_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres-shard2:
+    image: postgres:16
+    container_name: postgres-shard2
+    environment:
+      POSTGRES_DB: order_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5438:5432"  # Шард 2 на порту 5434
+    volumes:
+      - postgres_shard2_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_shard1_data:
+  postgres_shard2_data:
