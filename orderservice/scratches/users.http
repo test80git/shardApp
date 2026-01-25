@@ -1,0 +1,39 @@
+GET http://localhost:8080/api/users
+
+###
+GET http://localhost:8080/api/users/4
+
+
+###
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "Olya5",
+  "firstName": "Yula5",
+  "age": 55,
+  "email": "olyaY5@ya.ru"
+}
+
+###
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "Vovan",
+  "firstName": "Volkov",
+  "age": 12,
+  "email": "vovaV@ya.ru"
+}
+
+###
+PUT http://localhost:8080/api/users/2
+Content-Type: application/json
+
+{
+  "name": "VovaV",
+  "firstName": "Volkov",
+  "age": 25,
+  "email": "vovaV@ya.ru"
+}
+
