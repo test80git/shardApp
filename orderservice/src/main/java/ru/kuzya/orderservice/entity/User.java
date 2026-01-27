@@ -39,6 +39,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<Order> orders = new ArrayList<>();
+
     @Column(name = "name", nullable = false)
     private String name;
 

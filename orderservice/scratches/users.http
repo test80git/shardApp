@@ -1,7 +1,7 @@
 GET http://localhost:8080/api/users
 
 ###
-GET http://localhost:8080/api/users/4
+GET http://localhost:8080/api/users/2
 
 
 ###
@@ -36,4 +36,3 @@ Content-Type: application/json
   "age": 25,
   "email": "vovaV@ya.ru"
 }
-

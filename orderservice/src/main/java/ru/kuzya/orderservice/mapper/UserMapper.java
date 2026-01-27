@@ -13,16 +13,18 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-
+    @Mapping(target = "orders", source = "orders")
     UserResponseDto toDTO(User user);
 
     List<UserResponseDto> toListDTO(List<User> user);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "orders", ignore = true)
     User toEntity(CreateUserRequestDto request);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "orders", ignore = true)
     void updateEntity(UpdateUserRequest request, @MappingTarget User user);
 }
